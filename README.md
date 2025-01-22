@@ -1,4 +1,4 @@
-# FastAPI File Reader and Data API
+# File Reader System and Data API
 
 ## Setup Instructions
 
