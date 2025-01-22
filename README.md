@@ -12,14 +12,15 @@
 1. **Clone the repository**:
    
    git clone https://github.com/komala1455/file-system-python-rabbitmq-postgre.git
-   cd file_system_project
+   
+   cd file-system-python-rabbitmq-postgre
 
-2. **Create and activate a virtual environment**:
+3. **Create and activate a virtual environment**:
 
    python -m venv file_system
    file_system\\Scripts\\activate
 
-3. **Install dependencies**:
+4. **Install dependencies**:
   
   pip install -r requirements.txt
 
