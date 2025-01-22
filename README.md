@@ -18,11 +18,12 @@
 3. **Create and activate a virtual environment**:
 
    python -m venv file_system
+   
    file_system\\Scripts\\activate
 
-4. **Install dependencies**:
+5. **Install dependencies**:
   
-  pip install -r requirements.txt
+   pip install -r requirements.txt
 
 4. **Set up PostgreSQL database**:
     - Create a new PostgreSQL database.
@@ -44,11 +45,11 @@
 
 6. **Start the RabbitMQ consumer**:
 
-   python app/consumer.py
+     python app/consumer.py
 
 7. **Start the FastAPI server/ Application**:
  
-   python main.py
+    python main.py
 
    
 
