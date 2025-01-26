@@ -7,8 +7,8 @@ class DataEntry(Base):
     __tablename__ = TABLE_NAME
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True, nullable = False)
-    orderid = Column(String, nullable = False)
-    date = Column(Date, nullable = False)
+    order_id = Column(String, nullable = False)
+    order_creation_at = Column(Date, nullable = False)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
