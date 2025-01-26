@@ -1,5 +1,6 @@
 import pika
-from database import get_connection
+import json
+from database import get_db
 from models import DataEntry
 from config import RABBITMQ_URL, DATA_QUEUE
 from logger import logger
@@ -17,25 +18,19 @@ def callback(ch, method, properties, body):
     try:
         logger.info("Received message from queue.")
         # Convert message body from JSON string to Python dictionary
-        raw_data = body.decode('utf-8').split(',')
-        data = {
-            'name': raw_data[0],
-            'id': int(raw_data[1]),
-            'order_id': raw_data[2],
-            'order_creation_at': raw_data[3]
-        }
+        data = json.loads(body)
+        
         # Open database session
-        try:
-            db = next(get_connection())
-
-            # Create a new DataEntry object from the message data
-            instance = DataEntry(**data)
-            # Add the new entry to the database and commit the transaction
-            db.add(instance)
-            db.commit()
-            logger.info(f"Data entry added: {instance}")
-        except Exception as e:
-            logger.error(f"Error adding data entry to database: {e}")
+        db = next(get_db())
+        
+        # Create a new DataEntry object from the message data
+        db_entry = DataEntry(name=data['name'], id=data['id'], orderid=data['orderid'], date=data['date'])
+        
+        # Add the new entry to the database and commit the transaction
+        db.add(db_entry)
+        db.commit()
+        
+        logger.info(f"Data entry added: {db_entry}")
     except Exception as e:
         logger.error(f"Error processing message: {e}")
         ch.basic_nack(delivery_tag=method.delivery_tag)
